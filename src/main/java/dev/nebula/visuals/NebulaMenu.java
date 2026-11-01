@@ -91,7 +91,7 @@ public class NebulaMenu extends Screen {
 		box(ctx, x0, y0 + 40, 36, H - 40);
 		ItemStack[] icons = {
 			new ItemStack(Items.DIAMOND_SWORD), new ItemStack(Items.ENDER_EYE), new ItemStack(Items.CLOCK),
-			new ItemStack(Items.REDSTONE), new ItemStack(Items.COMPASS)
+			new ItemStack(Items.REDSTONE), new ItemStack(Items.COMPASS), new ItemStack(Items.FEATHER)
 		};
 		for (int i = 0; i < icons.length; i++) {
 			int ix = x0 + 4, iy = y0 + 44 + i * 30;
@@ -170,13 +170,30 @@ public class NebulaMenu extends Screen {
 				button(ctx, Gfx.t("Режим макс. FPS", "Max FPS mode"), () -> PerformanceMode.apply(mc));
 				if (renderDist < 0f) renderDist = PerformanceMode.viewDistance(mc);
 				slider(ctx, Gfx.t("Дальность", "Render dist."), 2, 32, renderDist, 0,
-					v -> renderDist = v, () -> PerformanceMode.setViewDistance(mc, Math.round(renderDist)));
+						v -> renderDist = v, () -> PerformanceMode.setViewDistance(mc, Math.round(renderDist)));
 				note(ctx, Gfx.t("Для большего FPS: Sodium,", "For more FPS: Sodium,"));
 				note(ctx, "Lithium, FerriteCore");
 				panel(ctx, rx, ay, pw, ah, Gfx.t("Опции", "Options"));
 				toggle(ctx, Gfx.t("Тени сущностей", "Entity shadows"), PerformanceMode.shadows(mc), v -> PerformanceMode.setShadows(mc, v));
 				toggle(ctx, Gfx.t("Мин. частицы", "Minimal particles"), PerformanceMode.minimalParticles(mc), v -> PerformanceMode.setMinimalParticles(mc, v));
 				toggle(ctx, "VSync", PerformanceMode.vsync(mc), v -> PerformanceMode.setVsync(mc, v));
+			}
+			case 5 -> {
+				panel(ctx, ax, ay, pw, ah, Gfx.t("Движение", "Movement"));
+				toggle(ctx, "Fly", c.fly, v -> c.fly = v);
+				slider(ctx, Gfx.t("Скорость полёта", "Fly speed"), 0.5f, 5f, c.flySpeed, 1, v -> c.flySpeed = v, null);
+				toggle(ctx, "Speed", c.speed, v -> c.speed = v);
+				slider(ctx, Gfx.t("Множитель", "Multiplier"), 1f, 5f, c.speedValue, 1, v -> c.speedValue = v, null);
+				toggle(ctx, "NoFall", c.noFall, v -> c.noFall = v);
+				toggle(ctx, Gfx.t("Jesus (вода)", "Jesus (water)"), c.jesus, v -> c.jesus = v);
+				toggle(ctx, "NoSlow", c.noSlow, v -> c.noSlow = v);
+				panel(ctx, rx, ay, pw, ah, Gfx.t("Бой", "Combat"));
+				toggle(ctx, "KillAura", c.killAura, v -> c.killAura = v);
+				slider(ctx, Gfx.t("Радиус", "Range"), 2f, 6f, c.auraRange, 1, v -> c.auraRange = v, null);
+				toggle(ctx, Gfx.t("Авто-инструмент", "Auto tool"), c.autoTool, v -> c.autoTool = v);
+				slider(ctx, "Reach", 3f, 6f, c.reach, 1, v -> c.reach = v, null);
+				note(ctx, Gfx.t("Reach выше 4.5 сервер", "Reach above 4.5 is"));
+				note(ctx, Gfx.t("часто не принимает.", "often rejected."));
 			}
 			default -> {
 				panel(ctx, ax, ay, pw, ah, Gfx.t("Общее", "General"));

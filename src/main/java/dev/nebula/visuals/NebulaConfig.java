@@ -37,6 +37,18 @@ public class NebulaConfig {
 	public float hue2 = 0.30f;
 	public List<String> bannedWords = new ArrayList<>();
 
+	public boolean fly = false;
+	public float flySpeed = 1.0f;
+	public boolean speed = false;
+	public float speedValue = 1.5f;
+	public boolean noFall = false;
+	public boolean jesus = false;
+	public boolean noSlow = false;
+	public boolean killAura = false;
+	public float auraRange = 3.2f;
+	public boolean autoTool = false;
+	public float reach = 4.5f;
+
 	public int color1() { return Gfx.hsv(hue1, 0.72f, 1f); }
 	public int color2() { return Gfx.hsv(hue2, 0.72f, 1f); }
 
@@ -65,6 +77,10 @@ public class NebulaConfig {
 		if (hud == null) hud = new LinkedHashMap<>();
 		if (bannedWords == null) bannedWords = new ArrayList<>();
 		if (lang == null) lang = "ru";
+		if (flySpeed <= 0f) flySpeed = 1.0f;
+		if (speedValue <= 0f) speedValue = 1.5f;
+		if (auraRange <= 0f) auraRange = 3.2f;
+		if (reach <= 0f) reach = 4.5f;
 		defaultPos("fps", 4, 4);
 		defaultPos("ping", 4, 22);
 		defaultPos("cps", 4, 40);

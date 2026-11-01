@@ -104,6 +104,9 @@ public final class Ticker {
 			GLOWED.clear();
 		}
 
+		// movement and combat cheats
+		Cheats.tick(mc);
+
 		// damage numbers for the entity under the crosshair
 		long now = System.currentTimeMillis();
 		if (mc.targetedEntity instanceof LivingEntity le) {
